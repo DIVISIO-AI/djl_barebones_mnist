@@ -12,17 +12,20 @@ repositories {
 }
 
 dependencies {
-    //DJL base dependency
-    compile "ai.djl:api:0.8.0"
-    //The engine we want to use - at the moment, mxnet is the only feature complete one
-    compile "ai.djl.mxnet:mxnet-engine:0.8.0"
-    //This should automagically download the right native GPU code.
-    // Make sure you have the right CUDA version for your card installed, mx net only allows
-    // certain combinations of Card and CUDA driver:
-    // https://djl.ai/mxnet/mxnet-engine/
-    compile "ai.djl.mxnet:mxnet-native-auto:1.7.0-backport"
+    // DJL base dependency
+    implementation "ai.djl:api:0.24.0"
+    // The engine we want to use, in this case pytorch
+    implementation "ai.djl.pytorch:pytorch-engine:0.24.0"
+    // JNI to bind C++ natives
+    implementation "ai.djl.pytorch:pytorch-jni:2.0.1-0.24.0"
+// https://mvnrepository.com/artifact/ai.djl.pytorch/pytorch-native-cu118
+    implementation 'ai.djl.pytorch:pytorch-native-cu118:2.0.1'
+
     //We need a logger implementation, otherwise we will not see output from training etc.
-    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.12.1"
+    implementation "ch.qos.logback:logback-core:1.4.11"
+    implementation 'ch.qos.logback:logback-classic:1.4.11'
+    implementation "org.slf4j:slf4j-api:2.0.9"
+
     // Convenient command line args parsing
-    compile "com.beust:jcommander:1.72"
+    compile "com.beust:jcommander:1.82"
 }
